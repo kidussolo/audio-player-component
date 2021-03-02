@@ -1,0 +1,14 @@
+{
+  "name": "audio-player-component",
+  "version": "1.0.0",
+  "description": "",
+  "main": "component.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kidus solomon",
+  "license": "ISC",
+  "dependencies": {
+    "howler": "^2.2.1"
+  }
+}

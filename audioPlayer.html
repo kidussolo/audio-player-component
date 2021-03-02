@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style type="text/css">
+.player-container {
+    width: 350px;
+    height: 60px;
+    border: 1px;
+    background: rgb(250, 250, 250);
+    margin-bottom: 20px;
+    border-radius: 200px;
+}
+.play {
+    height: 40px;
+    margin: 10px;
+}
+
+.pause {
+    height: 40px;
+    margin: 10px;
+    visibility: hidden;
+}
+
+</style>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        let play = document.querySelector(".play");
+        let pause = document.querySelector(".pause");
+        play.addEventListener("click", (e) => {
+            // alert("hello")
+            play.style.display = "none";
+            pause.style.visibility = "visible";
+        });
+
+        pause.addEventListener("click", (e) => {
+            pause.style.display = "none";
+            play.style.display = "visible";
+        });
+    });
+    
+</script>
+</head>
+<body>
+<div class = "player-container">
+    <audio controls></audio>
+</div>
+
+<div class = "player-container">
+    <svg class = "play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-2.5 -2.5 50 50" class="pulsing-icon"><g><g fill="none" fill-rule="evenodd"><circle cx="22.22603" cy="22.5" r="22.5" fill="#0A1633"></circle><path fill="#FFF" d="m14.84055,13.51085c0,-1.1 0.783,-1.556 1.75,-1.018l15.288,8.509c0.967,0.538 0.968,1.413 0,1.955l-15.288,8.56c-0.967,0.542 -1.75,0.08 -1.75,-1.012l0,-16.994z"></path></g></g></svg>
+    <svg class = "pause" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-2.5 -2.5 50 50"><g fill="none" fill-rule="evenodd"><circle cx="22.5" cy="22.5" r="22.5" fill="#0A1633"></circle><path fill="#FFF" d="M15 12H20V32.104H15zM25.875 12H30.875V32.104H25.875z"></path></g></svg>
+    <svg width="1em" height="0.8401em" viewBox="0 0 11.76 9.88" class="ed ee ef jg rj" aria-hidden="true">  <path fill="currentColor" d="M5.57 9.15c0 .18-.17.27-.4.27s-.57-.23-1-.69l-1.88-2H.46a.44.44 0 01-.32-.13.41.41 0 01-.14-.31V3.61a.41.41 0 01.14-.31.44.44 0 01.32-.13H2.3l1.88-2q.64-.69 1-.69c.23 0 .36.09.4.27a1.91 1.91 0 01.06.42v7.56a1.91 1.91 0 01-.07.42zm1.38-2.54h-.08a.48.48 0 01-.46-.46.48.48 0 01.41-.5q.42-.1.42-.72t-.42-.72a.48.48 0 01-.41-.5.48.48 0 01.46-.46H7.04a1.6 1.6 0 01.8.69 1.87 1.87 0 01.29 1 1.75 1.75 0 01-1.08 1.63zm.72 1.63h-.09a.44.44 0 01-.32-.13.41.41 0 01-.14-.31.42.42 0 01.08-.26.48.48 0 01.2-.15l.27-.14a1.67 1.67 0 00.28-.17 2.76 2.76 0 00.8-.93 2.59 2.59 0 000-2.42 2.76 2.76 0 00-.8-.93 1.67 1.67 0 00-.28-.18l-.27-.14a.48.48 0 01-.2-.15.42.42 0 01-.08-.26.41.41 0 01.14-.31.44.44 0 01.32-.13h.19a3.33 3.33 0 011.58 1.31 3.5 3.5 0 010 4 3.33 3.33 0 01-1.58 1.3zm.72 1.63h-.1a.44.44 0 01-.34-.12.4.4 0 01-.13-.31.33.33 0 01.13-.25.6.6 0 01.19-.16l.13-.09a.6.6 0 00.16-.08 2.11 2.11 0 00.3-.16l.28-.19a4.3 4.3 0 001.36-1.57 4.29 4.29 0 000-4 4.3 4.3 0 00-1.36-1.58l-.28-.19a2.11 2.11 0 00-.3-.16.6.6 0 00-.16-.07.8.8 0 01-.16-.09.6.6 0 01-.16-.16.33.33 0 01-.11-.25.4.4 0 01.11-.31.44.44 0 01.34-.13h.19a5.44 5.44 0 012.39 2 5.21 5.21 0 01.89 2.94 5.21 5.21 0 01-.89 2.94 5.44 5.44 0 01-2.39 2z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#000"  height="30" viewBox="0 0 24 24" width="30" class="ap--play">
+        <path d="M8 5v14l11-7z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+
+      <button class="ap-controls ap-next-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" height="24" viewBox="0 0 24 24" width="24">
+            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+      </button>
+
+      <button class="ap-controls ap-prev-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" height="24" viewBox="0 0 24 24" width="24">
+            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+      </button>
+
+      
+</div>
+
+</body>
+</html>
