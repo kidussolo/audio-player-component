@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <style>
+        .player-container {
+            display: flex;
+            border: 1px solid #dadce0;
+            border-radius: 100px;
+            height: 32px;
+            /* width: 150px; */
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-top-style: solid;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            border-top-color: rgb(218, 220, 224);
+            border-right-color: rgb(218, 220, 224);
+            border-bottom-color: rgb(218, 220, 224);
+            border-left-color: rgb(218, 220, 224);
+            border-image-source: initial;
+            border-image-slice: initial;
+            border-image-width: initial;
+            border-image-outset: initial;
+            border-image-repeat: initial;
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+            border-bottom-right-radius: 100px;
+            border-bottom-left-radius: 100px;
+        }
+
+        .play-icon {
+            margin: -4px;
+            margin-top: -4px;
+            margin-right: -4px;
+            margin-bottom: -4px;
+            margin-left: -4px;
+        }
+
+        .btn {
+            -webkit-user-select: none;
+            transition: background .3s;
+            border: 0;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-block;
+            flex-shrink: 0;
+            height: 48px;
+            outline: none;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+            width: 48px;
+            z-index: 0;
+            user-select: none;
+            transition-duration: 0.3s;
+            transition-timing-function: ease;
+            transition-delay: 0s;
+            transition-property: background;
+            border-top-width: 0px;
+            border-right-width: 0px;
+            border-bottom-width: 0px;
+            border-left-width: 0px;
+            border-top-style: initial;
+            border-right-style: initial;
+            border-bottom-style: initial;
+            border-left-style: initial;
+            border-top-color: initial;
+            border-right-color: initial;
+            border-bottom-color: initial;
+            border-left-color: initial;
+            border-image-source: initial;
+            border-image-slice: initial;
+            border-image-width: initial;
+            border-image-outset: initial;
+            border-image-repeat: initial;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+            outline-color: initial;
+            outline-style: none;
+            outline-width: initial;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .btn-color {
+            color: rgba(55, 141, 240, 0.54);
+            fill: rgba(231, 37, 30, 0.54);
+        }
+
+        .btn-alignment {
+            height: 32px;
+            margin: 4px 4px 4px 8px;
+            width: 32px;
+            margin-top: 4px;
+            margin-right: 4px;
+            margin-bottom: 4px;
+            margin-left: 8px;
+        }
+
+        .btn-position {
+            position: relative;
+            top: 50%;
+        }
+
+        .btn-position>span {
+            display: inline-block;
+            position: relative;
+        }
+
+        .audio-info {
+            letter-spacing: .01785714em;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            font-size: .875rem;
+            font-weight: 500;
+            line-height: 1.25rem;
+            color: #3c4043;
+            margin-top: 6px;
+            margin-right: 12px;
+        }
+
+        .slider-line {
+            transition: background-color .3s ease;
+            background-color: #bebebe;
+            height: 2px;
+            position: absolute;
+            top: 23px;
+            width: 100%;
+            transition-duration: 0.3s;
+            transition-timing-function: ease;
+            transition-delay: 0s;
+            transition-property: background-color;
+        }
+
+        .slider-color {
+            background-color: #bebebe55;
+        }
+
+        .slider-progress-line {
+            background-color: #4285f4;
+            width: 100%;
+            transform-origin: left;
+        }
+
+        .slider-progress-cirlce {
+            width: 12px;
+            position: absolute;
+            margin-left: -6px;
+            top: 18px;
+        }
+
+        /* .oyLoyb {
+            background-color: #fff;
+            display: none;
+            height: 2px;
+            position: absolute;
+            top: 5px;
+            width: 12px;
+        } */
+
+        /* .K598dd {
+            transition: all .3s ease;
+            transition-property: left, background-color;
+            background-color: rgba(66, 133, 244, 0.2);
+            border-radius: 100%;
+            height: 12px;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            width: 12px;
+            transition-duration: 0.3s;
+            transition-timing-function: ease;
+            transition-delay: 0s;
+            border-top-left-radius: 100%;
+            border-top-right-radius: 100%;
+            border-bottom-right-radius: 100%;
+            border-bottom-left-radius: 100%;
+        } */
+
+        /* .kUwJrc {
+            transition: all .1s ease;
+            transition-property: background-color, transform;
+            background-color: #4285f4;
+            border-radius: 100%;
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            transition-duration: 0.1s;
+            transition-timing-function: ease;
+            transition-delay: 0s;
+            border-top-left-radius: 100%;
+            border-top-right-radius: 100%;
+            border-bottom-right-radius: 100%;
+            border-bottom-left-radius: 100%;
+        } */
+
+        /* .TiX9ce {
+            transition: all .1s ease;
+            transition-property: background-color, transform;
+            border-radius: 100%;
+            height: 8px;
+            left: 2px;
+            top: 2px;
+            position: absolute;
+            width: 8px;
+            transition-duration: 0.1s;
+            transition-timing-function: ease;
+            transition-delay: 0s;
+            border-top-left-radius: 100%;
+            border-top-right-radius: 100%;
+            border-bottom-right-radius: 100%;
+            border-bottom-left-radius: 100%;
+        } */
+
+        .audio-slider {
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+            display: inline-block;
+            height: 48px;
+            min-width: 5em;
+            width: 100%;
+            outline: none;
+            position: relative;
+            vertical-align: middle;
+            user-select: none;
+            outline-color: initial;
+            outline-style: none;
+            outline-width: initial;
+        }
+
+        .audio-slider>.BGEVf {
+            width: 12px;
+            position: absolute;
+            margin-left: -6px;
+            top: 18px;
+        }
+
+        .slider-position {
+            margin-top: -13px;
+            position: absolute;
+        }
+
+        .audio-controller {
+            position: fixed;
+            bottom: 0;
+            width: 100%
+        }
+
+        .playback-controller {
+            display: flex;
+            align-items: center;
+            -webkit-box-align: center;
+        }
+
+        .article-info {
+            display: flex;
+            box-flex: 1;
+            flex-grow: 1;
+            flex-basis: 200px;
+            width: 300px;
+        }
+
+        .article-nav {
+            flex: 0;
+            height: 50px;
+            min-width: 50px;
+            margin-top: 19px;
+            margin-bottom: 19px;
+            margin-left: 19px;
+            cursor: pointer;
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: 0%;
+        }
+
+        .article-image {
+            border-radius: 4px;
+            display: block;
+            height: inherit;
+            width: inherit;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .article-title {
+            margin-left: 21px;
+            margin-top: 25px;
+            overflow: hidden;
+            flex: 1;
+            min-width: 0;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0%;
+        }
+
+        .title-alignment {
+            display: flex;
+            height: 18px;
+            width: -webkit-fill-available;
+            overflow: visible;
+            text-overflow: ellipsis;
+            overflow-x: visible;
+            overflow-y: visible;
+        }
+
+        .title-animation {
+            -webkit-mask-image: linear-gradient(to right, transparent, #202124 5%, #202124 95%, transparent);
+        }
+
+        .title-animation .title-text {
+            animation: marquee 10s linear infinite;
+            padding-right: 40px;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-delay: 0s;
+            animation-iteration-count: infinite;
+            animation-direction: normal;
+            animation-fill-mode: none;
+            animation-play-state: running;
+            animation-name: marquee;
+        }
+
+        .title-animation .title-text:last-of-type {
+            display: inline-block;
+        }
+
+
+        .playback-metadata {
+            letter-spacing: .025em;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: .75rem;
+            font-weight: 400;
+            line-height: 1rem;
+            color: #3c4043;
+            height: 16px;
+            margin-top: 4px;
+            overflow: hidden;
+            position: absolute;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        /* .playback-controller {
+            display: flex;
+            height: 48px;
+            width: 210px;
+            margin: auto;
+            margin-top: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+            margin-left: auto;
+        } */
+
+        .backward-btn {
+            height: 48px;
+            width: 48px;
+            float: left;
+        }
+
+        .play-btn {
+            height: 48px;
+            width: 48px;
+            margin-left: 33px;
+            margin-right: 33px;
+        }
+
+        .forward-btn {
+            height: 48px;
+            width: 48px;
+            float: right;
+        }
+
+        .volume {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-flex: 1;
+            flex-grow: 1;
+            flex-basis: 200px;
+        }
+
+        /* .WORtSb {
+            display: flex;
+        } */
+
+        .duration {
+            margin-left: 25px;
+            margin-right: 25px;
+            letter-spacing: .025em;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: .75rem;
+            font-weight: 400;
+            line-height: 1rem;
+            color: #3c4043;
+        }
+
+        .playback-container {
+            display: flex;
+            height: 48px;
+            width: 310px;
+            margin: auto;
+            margin-top: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+            margin-left: auto;
+            justify-content: center;
+        }
+
+        .audio-player {
+            display: flex;
+            align-items: center;
+            -webkit-box-align: center;
+        }
+
+        .volume-btn {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .volume-slider {
+            height: 2px;
+            margin-top: 22px;
+        }
+
+        .slider-container {
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+            display: inline-block;
+            height: 48px;
+            min-width: 5em;
+            width: 100%;
+            outline: none;
+            position: relative;
+            vertical-align: middle;
+            user-select: none;
+            outline-color: initial;
+            outline-style: none;
+            outline-width: initial;
+        }
+
+        
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <!-- Top Play with total audio length  -->
+        <div class="player-container">
+            <div class="play-icon">
+                <div role="button" class="btn btn-color btn-alignment" tabindex="0">
+
+                    <span class="btn-position">
+                        <span style="top: -12px">
+                            <svg height="24px" stroke-width="2" viewBox="-12 -12 24 24" width="24px">
+                                <g>
+                                    <circle cx="0" cy="0" r="9">
+                                    </circle>
+                                    <path d="M -2,4.5 l6-4.5-6-4.5v9z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <span class="audio-info">
+                Play • 26 min
+            </span>
+        </div>
+
+        <!-- The Audio controller -->
+        <div class="audio-controller">
+
+            <!-- Slider with the audio length -->
+            <div role="slider" class="audio-slider slider-position ">
+                <input id="rangeInput" style="width: 100%; height: 2px; cursor: pointer;" type="range" min="0" max="100"
+                    oninput="amount.value=rangeInput.value" />
+
+                <!-- <div class="slider-line slider-color">
+                </div>
+                <div class="slider-line slider-progress-line" style="left: 0%; transform: scale(0.0176, 1);">
+                </div>
+                <div class="slider-progress-cirlce " style="left: 1.76%;">
+                    <div class="oyLoyb ">
+                    </div>
+                    <div class="K598dd ">
+                    </div>
+                    <div class="kUwJrc ">
+                    </div>
+                    <div class="TiX9ce">
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="audio-player">
+                <div class="article-info">
+                    <!-- The article image -->
+                    <div class="article-nav" role="navigation">
+                        <div soy-server-key="6:qj9fvc" class="article-image">
+                            <!-- <img class="BhVIWc"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjZt805JMihjChbsRmtabBwt86kFvGcdEdzg2Fg-rP_hPUo6We"
+                        alt="The Daily" data-iml="8447.94499999989"> -->
+                            <svg width="47.557" height="29.113" viewBox="0 0 77.557 59.113"
+                                class="sc-eHgmQL iuruqP, text-align = center">
+                                <defs>
+                                    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1"
+                                        gradientUnits="objectBoundingBox">
+                                        <stop offset="0" stop-color="#f57d6c"></stop>
+                                        <stop offset="1" stop-color="#f77593"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <path id="Union_4" data-name="Union 4"
+                                    d="M47.124,58.175a36.7,36.7,0,0,0-2.32-3.762A23.228,23.228,0,0,0,42.416,51.5a8.764,8.764,0,0,0-2.752-2.01c-.012-.006-1.268-.58-2.7-1.326-.841-.439-1.578-.851-2.19-1.225a11.034,11.034,0,0,1-1.7-1.216h0a15.582,15.582,0,0,1-1.7.416c-.622.121-1.265.217-1.912.286a22.986,22.986,0,0,1-2.428.13,20.952,20.952,0,0,1-3.774-.336,18.328,18.328,0,0,1-4.094-1.251,17.261,17.261,0,0,1-4.078-2.531,18.609,18.609,0,0,1-1.928-1.859,20.919,20.919,0,0,1-1.8-2.316c-.047-.014-.472-.144-1.136-.418A20.714,20.714,0,0,1,7.5,36.472a18.21,18.21,0,0,1-3.292-2.5,14.114,14.114,0,0,1-2.836-3.813c-1.848-3.692-1.828-8.066.061-13a7.778,7.778,0,0,1,.4-.728,20.272,20.272,0,0,1,1.411-2.031A34.485,34.485,0,0,1,6,11.287,51.585,51.585,0,0,1,10.46,7.336c.006,0,.61-.468,1.718-1.146.653-.4,1.351-.795,2.076-1.175.906-.475,1.856-.929,2.823-1.347a44.681,44.681,0,0,1,7.7-2.522A45.053,45.053,0,0,1,34.886,0a46.564,46.564,0,0,1,6.382.444,49.622,49.622,0,0,1,6.922,1.48c1.211.35,2.437.753,3.644,1.2,1.249.46,2.513.978,3.757,1.54,1.284.58,2.583,1.222,3.861,1.91,1.317.709,2.649,1.485,3.958,2.307.012.008,1.26.85,2.983,2.284,1.013.842,1.99,1.722,2.9,2.614a41.124,41.124,0,0,1,3.113,3.381,23.276,23.276,0,0,1,4.653,8.421,14.192,14.192,0,0,1,.434,2.334A12.351,12.351,0,0,1,77.5,30.3a11.834,11.834,0,0,1-.492,2.416,12.826,12.826,0,0,1-1.059,2.427s-.267.417-.736,1.032a23.524,23.524,0,0,1-2.01,2.311,16.288,16.288,0,0,1-2.989,2.411,8.808,8.808,0,0,1-3.673,1.332,13.212,13.212,0,0,1-.965,1.2c-.372.417-.774.829-1.2,1.226a20.556,20.556,0,0,1-1.663,1.405,19.19,19.19,0,0,1-4.7,2.631,17.936,17.936,0,0,1-3.02.867,18.218,18.218,0,0,1-3.458.329c-.419,0-.846-.014-1.27-.042l1.535,7.05a3.372,3.372,0,0,1,.025.705,1.53,1.53,0,0,1-.125.528.582.582,0,0,1-.355.331l-2.706.641a1.732,1.732,0,0,1-.272.02A1.15,1.15,0,0,1,47.124,58.175ZM40.463,35.192v1.771H53.015a12.033,12.033,0,0,0,2.922-.647,8.274,8.274,0,0,0,1.878-.96,5.805,5.805,0,0,0,1-.871,2.875,2.875,0,0,0,.3-.38,4.638,4.638,0,0,0,.878-2.16,5.845,5.845,0,0,0-.1-2.015,7.719,7.719,0,0,0-.488-1.488,5.65,5.65,0,0,0-.293-.581,5.975,5.975,0,0,0-1.01-1.289,13.405,13.405,0,0,0-1.288-1.126,18.455,18.455,0,0,0-1.579-1.1,4.664,4.664,0,0,0,1.221-.215,3.186,3.186,0,0,0,.786-.378,1.9,1.9,0,0,0,.545-.519,5.243,5.243,0,0,0,1.042-2.5,6.824,6.824,0,0,0-.116-2.371,9.252,9.252,0,0,0-.579-1.767,7.061,7.061,0,0,0-.347-.693,12.878,12.878,0,0,0-2.051-2.33,13.577,13.577,0,0,0-2.031-1.5,11.019,11.019,0,0,0-2.173-1.036,22.953,22.953,0,0,0-4.605-1.679,40.819,40.819,0,0,0-4.9-.929,59.6,59.6,0,0,0-7.468-.481c-.607,0-.958.011-.972.012V9.795a3.245,3.245,0,0,1,1.054-.121,16.787,16.787,0,0,1,1.794.121V30.1L24.378,9.795a7.756,7.756,0,0,0-1.881.61c-.62.27-1.331.626-2.114,1.057-1.34.737-2.427,1.441-2.438,1.448v1.473a12.909,12.909,0,0,0,2.332-1.212V35.192H17.562v1.771h6.993V35.192H21.95V15.021L35.225,36.963h2.885V9.795a44.641,44.641,0,0,1,5.137.629V35.192H40.463Zm7.04,0V24.261l4,.238s3.861,1.31,4.163,4.3c0,0,.5,2.364,0,3.319a4.16,4.16,0,0,1-3.029,3.066Zm0-12.547v-11.1s6.335,1.523,7,4.522a9.011,9.011,0,0,1,0,5.994s-.407.884-2.479,1.068Z"
+                                    transform="translate(0)" fill="url(#linear-gradient)"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- The Article title -->
+                    <div class="article-title">
+                        <div class="title-alignment title-animation">
+                            <div class="title-text" style="animation-duration: 14.48s;">
+                                В Полтавской области обнаружили новую вспышку АЧС
+                            </div>
+                            <div class="title-text" style="animation-duration: 14.48s;">
+                                В Полтавской области обнаружили новую вспышку АЧС
+                            </div>
+                        </div>
+                        <div class="playback-metadata" style="opacity: 1;">
+                            Buffering...
+                        </div>
+                        <div class="playback-metadata" style="opacity: 0;">
+                            27 mins left
+                        </div>
+                    </div>
+                </div>
+                <!-- <div> -->
+                <div class="container">
+                    <!-- The fast-backward button -->
+                    <div class="playback-container">
+                        <div class="backward-btn">
+                            <div role="button" class="btn btn-color" tabindex="0">
+                                <!-- <div class="VTBa7b ">
+                            </div> -->
+                                <span class="btn-position">
+                                    <span style="top: -12px">
+                                        <svg id="fast-backward" style="width: 20px; height: 20px; cursor: pointer;"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10"
+                                                stroke-width="2"
+                                                d="M35 27.9l10-6.8v21.8l-10-6.8v6.8L19 32v-.1l16-10.8v6.8z"
+                                                stroke-linejoin="round" stroke-linecap="round"></path>
+                                            <circle data-name="layer2" cx="31" cy="32" r="30" fill="none"
+                                                stroke="#202020" stroke-miterlimit="10" stroke-width="2"
+                                                stroke-linejoin="round" stroke-linecap="round"></circle>
+                                            <path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10"
+                                                stroke-width="2" d="M17 20v24" stroke-linejoin="round"
+                                                stroke-linecap="round">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- The play button -->
+                        <div class="play-btn">
+                            <div role="button" class="btn btn-color" tabindex="0">
+                                <span class="btn-position">
+                                    <span style="top: -12px">
+                                        <svg id="play-icon" style="width: 20px; height: 20px; cursor: pointer;"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10"
+                                                stroke-width="2" d="M24 18l24 14-24 14V18z" stroke-linejoin="round"
+                                                stroke-linecap="round"></path>
+                                            <circle data-name="layer1" cx="32" cy="32" r="30" fill="none"
+                                                stroke="#202020" stroke-miterlimit="10" stroke-width="2"
+                                                stroke-linejoin="round" stroke-linecap="round"></circle>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- The fast-forward button -->
+                        <div class="forward-btn">
+                            <div role="button" class="btn btn-color" tabindex="0">
+                                <span class="btn-position">
+                                    <span style="top: -12px">
+                                        <svg id="fast-forward" style="width: 20px; height: 20px; cursor: pointer;"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10"
+                                                stroke-width="2"
+                                                d="M28 27.9l-10-6.8v21.8l10-6.8v6.8L44 32v-.1L28 21.1v6.8z"
+                                                stroke-linejoin="round" stroke-linecap="round"></path>
+                                            <circle data-name="layer2" cx="32" cy="32" r="30" fill="none"
+                                                stroke="#202020" stroke-miterlimit="10" stroke-width="2"
+                                                stroke-linejoin="round" stroke-linecap="round"></circle>
+                                            <path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10"
+                                                stroke-width="2" d="M46 20v24" stroke-linejoin="round"
+                                                stroke-linecap="round">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <div class="volume">
+                    <div class="volume-btn">
+                        <!-- The volume icon -->
+                        <!-- <div class="WORtSb"> -->
+                            <div role="button" class="btn btn-color" tabindex="0">
+                                <div class="VTBa7b ">
+                                </div>
+                                <span class="btn-position">
+                                    <span style="top: -12px">
+                                        <svg style="width: 20px; height: 20px; cursor: pointer;"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path data-name="layer2"
+                                                d="M44.2 21.8a12 12 0 0 1 0 20.5M50 16a20 20 0 0 1 0 32" fill="none"
+                                                stroke="#202020" stroke-miterlimit="10" stroke-width="2"
+                                                stroke-linejoin="round" stroke-linecap="round"></path>
+                                            <path data-name="layer1"
+                                                d="M38 6L20 24H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12l18 18z" fill="none"
+                                                stroke="#202020" stroke-miterlimit="10" stroke-width="2"
+                                                stroke-linejoin="round" stroke-linecap="round"></path>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div>
+                        <!-- </div> -->
+                        <!-- The volume slider -->
+                        <!-- <div class="PSRJc"> -->
+                            <div role="slider" class="slider-container" tabindex="0">
+                                <input class= "volume-slider" type="range" min="0", max="100"></input>
+                                <!-- <div class="ptC3Le MLPG7">
+                                </div> -->
+                                <!-- <div class="ptC3Le FTnqqe"
+                                    style="left: 0%; -ms-transform: scale(1, 1); -webkit-transform: scale(1, 1); transform: scale(1, 1);">
+                                </div>
+                                <div class="BGEVf " style="left: 100%">
+                                    <div class="oyLoyb ">
+                                    </div>
+                                    <div class="K598dd ">
+                                    </div>
+                                    <div class="kUwJrc ">
+                                    </div>
+                                    <div class="TiX9ce">
+                                    </div>
+                                </div> -->
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                    <div class="duration">
+                        <span>
+                            00:27
+                        </span>
+                        /
+                        <span>
+                            27:25
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

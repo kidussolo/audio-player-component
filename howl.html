@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style type="text/css">
+            button {
+                margin: 25px 0 0 25px;
+            }
+
+            .hide{
+                display: none;
+            }
+
+            .time{
+                text-align: right;
+                position: absolute;
+                top: 3px;
+                right: 10px;
+                left: 0;
+                color: #335fb8;
+                z-index: 2;
+            }
+            .audio-progress{
+                height: 22px;
+                position: relative;
+                margin-top: 15px;
+                background-color: #e5eff1;
+
+            }
+            #progress {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 100%;
+                background-color: #006182;
+                z-index: 1;
+            }
+        </style>
+
+        <script>
+            document.querySelector
+            var utils = {
+                formatTime: function (secs) {
+                    var minutes = Math.floor(secs / 60) || 0;
+                    var seconds = (secs - minutes * 60) || 0;
+                    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                },
+                updateTimeTracker: function () {
+                    var self = this;
+                    var seek = sound.seek() || 0;
+                    var currentTime = utils.formatTime(Math.round(seek));
+
+                    $('#timer').text(currentTime);
+                    progress.style.width = (((seek / self.duration()) * 100) || 0) + '%';
+                    
+                    if (self.playing()) {
+                        requestAnimationFrame(utils.updateTimeTracker.bind(self));
+                    }
+                }
+            };
+
+            var sound = new Howl({
+                src: ['http://www.alexkatz.me/codepen/music/interlude.mp3'],
+                onplay: function() {
+                    console.log('PLAYING ... ');
+                    audioPlayed = true;
+                    var time = Math.round(sound.duration());
+
+                    $('#duration').html(utils.formatTime(time));
+                    // Start upating the progress of the track.
+                    requestAnimationFrame(utils.updateTimeTracker.bind(this));
+
+                    $('img.play').addClass('hide');
+                    $('img.pause').removeClass('hide');
+                },
+                onpause: function() {
+                    console.log('PAUSED ... ');
+                    $('img.play').removeClass('hide');
+                    $('img.pause').addClass('hide');
+                },
+                onend: function() {
+                    console.log('ENDED ...');
+                    $('img.play').removeClass('hide');
+                    $('img.pause').addClass('hide');
+                    $('#sound').toggleClass('playing');
+                }
+            });
+
+            // Play/Pause btn
+            // $('#sound').click(function () {
+            //     $(this).toggleClass('playing');
+            //     if($(this).hasClass('playing')){
+            //         sound.play();
+            //     } else {
+            //         sound.pause();
+            //     }
+            // });
+            document.querySelector('#sound').addEventListener('click', function() {
+                console.log("sdfkl")
+                $(this).toggleClass('playing');
+                if($(this).hasClass('playing')){
+                    sound.play();
+                } else {
+                    sound.pause();
+                }
+            })
+        </script>
+
+    </head>
+    <body>
+        <div class="audio-controls">
+            <button type="button" id="sound" class="static">
+                <img src="https://image.flaticon.com/icons/png/128/117/117999.png" class="play">
+                <img src="https://image.flaticon.com/icons/png/128/52/52285.png" class="pause hide">
+            </button>
+        </div>
+        <div class="audio-progress">
+            <div id="progress"></div>
+            <div class="time">
+                <span id="timer">0:00 </span>/
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+    </body>
+</html>
